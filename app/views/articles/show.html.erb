@@ -1,7 +1,26 @@
-<h1>Detalles del articulo</h1>
-<p><strong>Title: </strong><%= @article.title %></p>
-<p><strong>Descripcion: </strong><%= @article.descripcion %></p>
+<h1 class="text-center my-3"><%= @article.title%></h1>
 
-<%= link_to 'Editar', edit_article_path(@article)%> |
-<%= link_to 'Elminar', article_path(@article), method: :delete, data: { confirm: "Estas seguro?" } %> |
-<%= link_to 'Regresar', articles_path%>
+<div class="container-fluid">
+            <div class="row justify-content-md-center">
+                  <div class="col-8 mb-4">
+                        <div class="card text-center shadow mb-5 bg-white rounded"">
+                              <div class="card-header font-italic">
+                              de <%= @article.user.username if @article.user %> 
+                              </div>
+                                    <div class="card-body">
+                                          <div class="card-text text-left"><%= simple_format(@article.descripcion) %></div>
+                                          <%= link_to 'Editar', edit_article_path(@article), class: "btn btn-outline-primary"%>
+                                          <%= link_to 'Eliminar', article_path(@article), method: :delete, data: {confirm: "¿Estás seguro?"}, class: "btn btn-outline-danger"%>
+                                    </div>
+                              <div class="card-footer text-muted">
+                                    <small>Creado: <%= time_ago_in_words(@article.created_at) %>,
+                                                      Editado: <%= time_ago_in_words(@article.updated_at) %>
+                                    </small>
+                              </div>
+                        </div>
+                              <div class="text-center font-weight-bold mb-5">
+                        <%= link_to '[ Regresar a los articulos ]', articles_path, class: "text-dark"%>
+                        </div>
+                  </div>
+            </div>
+</div>

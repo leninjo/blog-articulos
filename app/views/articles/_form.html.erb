@@ -1,24 +1,29 @@
-<% if @article.errors.any? %>
-      <h3>Sucedieron los siguientes errores</h3>
-      <ul>
-            <% @article.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-            <% end %>
-      </ul>
-<% end %>
+<div class="container">
+      <div class="row justify-content-center">
+            <div class="col-10">
+            <%= render 'shared/errors', obj: @article %>
+                  <%= form_with(model: @article, class: "shadow p-3 mb-3 bg-dark rounded", local: true) do |f| %>
+                        <div class="form-group row text-white">
+                              <%= f.label :title, class: "col-2 col-form-label" %>
+                              <div class="col-10">
+                                    <%= f.text_field :title, class: "form-control" %>
+                              </div> 
+                        </div>
 
-<%= form_with(model: @article, local: true) do |f| %>
-      <p>
-            <%= f.label :title %><br/>
-            <%= f.text_field :title %>
-      </p>
+                        <div class="form-group row text-white">
+                              <%= f.label :descripcion, class: "col-2 col-form-label" %>
+                              <div class="col-10">
+                                    <%= f.text_area :descripcion, rows: 10, class: "form-control" %>
+                              </div>
+                        </div>   
 
-      <p>
-            <%= f.label :descripcion %><br/>
-            <%= f.text_area :descripcion %>
-      </p>   
-
-      <p>
-            <%= f.submit %>
-      </p>
-<% end %>
+                        <div class="form-group row justify-content-center">
+                              <%= f.submit class: "btn btn-outline-light btn-lg" %>
+                        </div>
+                  <% end %>
+            </div>
+      </div>
+      <div class="text-center font-weight-bold mb-5">
+            <%= link_to '[ Regresar a los articulos ]', articles_path, class: "text-dark"%>
+      </div>
+</div>
