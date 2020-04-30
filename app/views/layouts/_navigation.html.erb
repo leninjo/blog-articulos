@@ -1,22 +1,48 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <%= link_to "CRUD Articulos", root_path, class: "navbar-brand"%>
+    <%= link_to "Blog's Articulos", root_path, class: "navbar-brand font-weight-bold text-uppercase"%>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Articulos
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to "Ver articulos", articles_path, class: "dropdown-item"%>
-            <div class="dropdown-divider"></div>
-            <%= link_to "Crear articulo", new_article_path, class: "dropdown-item"%>
-          </div>
+        <li class="nav-item">
+          <%= link_to "Bloggers", users_path, class: "nav-link text-white"%>
         </li>
-      </ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Articulos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Ver articulos", articles_path, class: "dropdown-item"%>
+              <% if logged_in? %>
+                <%= link_to "Crear articulo", new_article_path, class: "dropdown-item"%>
+              <% end %>
+            </div>
+          </li>
+        </ul>
+      <div>
+        <ul class="navbar-nav mr-auto">
+          <% if logged_in?%>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.username %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Perfil", user_path(current_user), class: "dropdown-item"%>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Cerrar sesión", logout_path, method: :delete, class: "dropdown-item"%>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Iniciar sesión", login_path, class: "nav-link mx-1 btn btn-info btn-sm text-white"%>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Registrarme", signup_path, class: "nav-link mx-1 btn btn-success btn-sm text-white"%>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
 </nav>
 

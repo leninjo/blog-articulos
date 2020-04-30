@@ -1,7 +1,22 @@
 <h1 class="text-center my-3"><strong><%= @user.username %></strong></h1>
+<h5 class="text-center my-3"><%= @user.email %></h5>
 
 <%= gravatar_for @user, size: 200 %>
 
+<% if logged_in? && @user == current_user %>
+    <div class="text-center mt-4">
+        <%= link_to  "Editar perfil", edit_user_path(@user), class: "btn btn-outline-dark" %>
+        <br>
+        <br>
+        <%= link_to '[ Eliminar cuenta ]', user_path(@user), method: :delete, data: {confirm: "¿Estás seguro?"}, class: "text-danger" %>
+    </div>
+<% end %>
+<hr>
 <h4 class="text-center my-3">Articulos creados</h4>
-
+<div class="flickr_pagination my-2">
+    <%= will_paginate @articles, :container => false %>
+</div>
 <%= render 'articles/article' %>
+<div class="flickr_pagination my-2">
+    <%= will_paginate @articles, :container => false %>
+</div>

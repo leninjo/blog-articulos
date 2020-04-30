@@ -1,2 +1,8 @@
 <h1 class="text-center my-3">Lista de articulos</h1>
+<div class="flickr_pagination my-2">
+    <%= will_paginate @articles, :container => false %>
+</div>
 <%= render 'article' %>
+<div class="flickr_pagination my-2">
+    <%= will_paginate @articles, :container => false %>
+</div>
